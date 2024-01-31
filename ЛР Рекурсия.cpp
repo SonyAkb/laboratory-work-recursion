@@ -42,6 +42,11 @@ int main() {
     int n; //количество членов ряда
     double x; //переменная
 
+    cout << "Дана такая функция" << endl;
+    cout << "        x^3         x^(2*n - 1)" << endl;
+    cout << "S = x + --- + ... + -----------" << endl;
+    cout << "         3!          (2*n - 1)" << endl;
+
     do{
         cout << "Введите целое, положительное число n - количество членов ряда: ";
         cin >> n; //ввожу количество членов ряда
@@ -60,7 +65,6 @@ int main() {
     double result2 = Direct_Calculation(n, x); //вычисляю прямым способом
     auto end2 = chrono::steady_clock::now(); // конечное время
     auto diff2 = end2 - start2; //разница между начальным и конечным временем
-
 
     cout << endl << "Результат через сумму функционального ряда с помощью рекурсивной функции: " << result1 << endl;
     cout << "Функция выполнена за " << chrono::duration <double, milli>(diff1).count() << " ms" << endl << endl;
