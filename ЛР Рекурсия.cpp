@@ -19,14 +19,30 @@ double Direct_Calculation(int n, double x) { // прямое вычисление значения функц
     return sum; 
 }
 
+double Recursive_Calculation(int n, double x) {
+    double qwe;
+    if (n == 0) {
+        return x; // базовый случай
+    }
+    else {
+        qwe = pow(x, 2 * n + 1) / factorial(2 * n + 1) + Recursive_Calculation(n - 1, x);
+        cout << n << ' ' << qwe << endl;
+        return qwe; // рекурсивный случай
+    }
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
     int n = 5;
     double x = 2;
 
-    double result = Direct_Calculation(n, x);
+    double result1 = Recursive_Calculation(n - 1, x);
+    cout << "-----" << endl;
+    double result2 = Direct_Calculation(n, x);
 
-    cout << "Результат через прямое вычисление значения функции: " << result << endl;
+    cout << "Результат через сумму функционального ряда: " << result1 << endl;
+    
+    cout << "Результат через прямое вычисление значения функции: " << result2 << endl;
 
     return 0;
 }
