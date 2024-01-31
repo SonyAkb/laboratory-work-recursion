@@ -1,15 +1,15 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <cmath>
-
+#include <chrono>
 using namespace std;
 
-unsigned int Factorial_Recursive(unsigned int n){ //факториал через рекурсию
+unsigned int Factorial_Recursive(unsigned int n){ //РІС‹С‡РёСЃР»РµРЅРёРµ С„Р°РєС‚РѕСЂРёР°Р»Р° С‡РµСЂРµР· СЂРµРєСѓСЂСЃРёСЋ
     if (n == 0)
         return 1;
     return n * Factorial_Recursive(n - 1);
 }
 
-unsigned int Factorial_Direct(unsigned int n){ //факториал через цикл
+unsigned int Factorial_Direct(unsigned int n){ //РІС‹С‡РёСЃР»РµРЅРёРµ С„Р°РєС‚РѕСЂРёР°Р»Р° С‡РµСЂРµР· С†РёРєР»
     int res = 1;
     for (int i = 1; i <= n; i++) {
         res = res * i;
@@ -17,7 +17,7 @@ unsigned int Factorial_Direct(unsigned int n){ //факториал через цикл
     return res;
 }
 
-double Direct_Calculation(int n, double x) { // прямое вычисление значения функции
+double Direct_Calculation(int n, double x) { // РїСЂСЏРјРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё
     double sum = 0;
     for (int i = 0; i < n; i++) {
         sum += pow(x, 2 * i + 1) / Factorial_Direct(2 * i + 1);
@@ -25,36 +25,51 @@ double Direct_Calculation(int n, double x) { // прямое вычисление значения функц
     return sum; 
 }
 
-double Recursive_Calculation(int n, double x) { // рекурсивное вычисление функции
+double Recursive_Calculation(int n, double x) { // СЂРµРєСѓСЂСЃРёРІРЅРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ С„СѓРЅРєС†РёРё
     if (n == 0) {
-        return x; // когда вычисляется первый элемент ряда
+        return x; // РєРѕРіРґР° РІС‹С‡РёСЃР»СЏРµС‚СЃСЏ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ СЂСЏРґР°
     }
     else {                                                          
         return pow(x, 2 * n + 1) / Factorial_Recursive(2 * n + 1) + Recursive_Calculation(n - 1, x);
-        //pow(x, 2 * n + 1)  возвожу в неоюходимую степень
-        //Factorial_Recursive(2 * n + 1)  вычисляю факториал
-        //Recursive_Calculation(n - 1, x)  прибавляю предыдущее значение ряда
+        //pow(x, 2 * n + 1)  РІРѕР·РІРѕР¶Сѓ РІ РЅРµРѕР±С…РѕРґРёРјСѓСЋ СЃС‚РµРїРµРЅСЊ
+        //Factorial_Recursive(2 * n + 1)  РІС‹С‡РёСЃР»СЏСЋ С„Р°РєС‚РѕСЂРёР°Р»
+        //Recursive_Calculation(n - 1, x)  РїСЂРёР±Р°РІР»СЏСЋ РїСЂРµРґС‹РґСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ СЂСЏРґР°
     }
 }
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    int n; //количество членов ряда
-    double x; //переменная
+    int n; //РєРѕР»РёС‡РµСЃС‚РІРѕ С‡Р»РµРЅРѕРІ СЂСЏРґР°
+    double x; //РїРµСЂРµРјРµРЅРЅР°СЏ
 
     do{
-        cout << "Введите целое, положительное число n - количество членов ряда: ";
-        cin >> n; //ввожу количество членов ряда
+        cout << "Р’РІРµРґРёС‚Рµ С†РµР»РѕРµ, РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ n - РєРѕР»РёС‡РµСЃС‚РІРѕ С‡Р»РµРЅРѕРІ СЂСЏРґР°: ";
+        cin >> n; //РІРІРѕР¶Сѓ РєРѕР»РёС‡РµСЃС‚РІРѕ С‡Р»РµРЅРѕРІ СЂСЏРґР°
     } while (n < 1);
     
-    cout << "Введите число x - переменную: ";
-    cin >> x; //ввожу переменную
+    cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ x - РїРµСЂРµРјРµРЅРЅСѓСЋ: ";
+    cin >> x; //РІРІРѕР¶Сѓ РїРµСЂРµРјРµРЅРЅСѓСЋ
 
-    double result1 = Recursive_Calculation(n - 1, x);
-    double result2 = Direct_Calculation(n, x);
+    auto start1 = chrono::steady_clock::now();  // РЅР°С‡Р°Р»СЊРЅРѕРµ РІСЂРµРјСЏ
+    double result1 = Recursive_Calculation(n - 1, x); //РІС‹С‡РёСЃР»СЏСЋ СЂРµРєСѓСЂСЃРёРµР№
+    auto end1 = chrono::steady_clock::now(); // РєРѕРЅРµС‡РЅРѕРµ РІСЂРµРјСЏ
+    auto diff1 = end1 - start1; //СЂР°Р·РЅРёС†Р° РјРµР¶РґСѓ РЅР°С‡Р°Р»СЊРЅС‹Рј Рё РєРѕРЅРµС‡РЅС‹Рј РІСЂРµРјРµРЅРµРј
+  
 
-    cout << "Результат через сумму функционального ряда: " << result1 << endl;
-    cout << "Результат через прямое вычисление значения функции: " << result2 << endl;
+    auto start2 = chrono::steady_clock::now(); // РЅР°С‡Р°Р»СЊРЅРѕРµ РІСЂРµРјСЏ
+    double result2 = Direct_Calculation(n, x); //РІС‹С‡РёСЃР»СЏСЋ РїСЂСЏРјС‹Рј СЃРїРѕСЃРѕР±РѕРј
+    auto end2 = chrono::steady_clock::now(); // РєРѕРЅРµС‡РЅРѕРµ РІСЂРµРјСЏ
+    auto diff2 = end2 - start2; //СЂР°Р·РЅРёС†Р° РјРµР¶РґСѓ РЅР°С‡Р°Р»СЊРЅС‹Рј Рё РєРѕРЅРµС‡РЅС‹Рј РІСЂРµРјРµРЅРµРј
+
+
+    cout << endl << "Р РµР·СѓР»СЊС‚Р°С‚ С‡РµСЂРµР· СЃСѓРјРјСѓ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕРіРѕ СЂСЏРґР° СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРєСѓСЂСЃРёРІРЅРѕР№ С„СѓРЅРєС†РёРё: " << result1 << endl;
+    cout << "Р¤СѓРЅРєС†РёСЏ РІС‹РїРѕР»РЅРµРЅР° Р·Р° " << chrono::duration <double, milli>(diff1).count() << " ms" << endl << endl;
+
+    cout << "Р РµР·СѓР»СЊС‚Р°С‚ С‡РµСЂРµР· РїСЂСЏРјРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё: " << result2 << endl;
+    cout << "Р¤СѓРЅРєС†РёСЏ РІС‹РїРѕР»РЅРµРЅР° Р·Р° " << chrono::duration <double, milli>(diff2).count() << " ms" << endl;
+
+    if (diff1 < diff2) cout << endl <<  "Р’С‹С‡РёСЃР»РµРЅРёРµ СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРєСѓСЂСЃРёРё Р±С‹СЃС‚СЂРµРµ";
+    else cout << endl << "РџСЂСЏРјРѕРµ РІС‹С‡РёСЃР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ С„СѓРЅРєС†РёРё Р±С‹СЃС‚СЂРµРµ";
 
     return 0;
 }
