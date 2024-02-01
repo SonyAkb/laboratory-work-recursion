@@ -26,16 +26,18 @@ int main() {
     cout << "Введите число x - переменную: ";
     cin >> x; //ввожу переменную
 
-    auto start1 = chrono::steady_clock::now();  // начальное время
+    auto start_time_recursive = chrono::steady_clock::now();  // начальное время
     double result1 = Recursive_Calculation(n - 1, x); //вычисляю рекурсией
-    auto end1 = chrono::steady_clock::now(); // конечное время
-    auto diff1 = end1 - start1; //разница между начальным и конечным временем
+    auto end_time_recursive = chrono::steady_clock::now(); // конечное время
+
+    auto diff1 = end_time_recursive - start_time_recursive; //разница между начальным и конечным временем
   
 
-    auto start2 = chrono::steady_clock::now(); // начальное время
+    auto start_time_direct = chrono::steady_clock::now(); // начальное время
     double result2 = Direct_Calculation(n, x); //вычисляю прямым способом
-    auto end2 = chrono::steady_clock::now(); // конечное время
-    auto diff2 = end2 - start2; //разница между начальным и конечным временем
+    auto end_time_direct = chrono::steady_clock::now(); // конечное время
+
+    auto diff2 = end_time_direct - start_time_direct; //разница между начальным и конечным временем
 
     cout << endl << "Результат через сумму функционального ряда с помощью рекурсивной функции: " << result1 << endl;
     cout << "Функция выполнена за " << chrono::duration <double, milli>(diff1).count() << " ms" << endl << endl;
