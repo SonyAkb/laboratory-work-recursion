@@ -77,10 +77,8 @@ double Recursive_Calculation(int n, double x) { // рекурсивное выч
     if (n == 0) {
         return x; // когда вычисляется первый элемент ряда
     }
-    else {
-        return pow(x, 2 * n + 1) / Factorial_Recursive(2 * n + 1) + Recursive_Calculation(n - 1, x);
-        //pow(x, 2 * n + 1)  возвожу в необходимую степень
-        //Factorial_Recursive(2 * n + 1)  вычисляю факториал
-        //Recursive_Calculation(n - 1, x)  прибавляю предыдущее значение ряда
-    }
+    return pow(x, 2 * n + 1) / Factorial_Recursive(2 * n + 1) + Recursive_Calculation(n - 1, x);
+    //pow(x, 2 * n + 1)  возвожу в необходимую степень
+    //Factorial_Recursive(2 * n + 1)  вычисляю факториал
+    //Recursive_Calculation(n - 1, x)  прибавляю предыдущее значение ряда
 }
