@@ -1,24 +1,24 @@
-#include <iostream>
+Ôªø#include <iostream>
 using namespace std;
 
 int fibonacci(int n) {
-    if (n == 0) return 0;
+    if (n == 0) return 0; 
     if (n == 1) return 1;
     return fibonacci(n - 1) + fibonacci(n - 2);
+    // —Å—É–º–º–∞ 2—Ö –ø—Ä–µ–¥—ã–¥—É—â–∏—Ö —á–∏—Å–µ–ª —Ä—è–¥–∞ –§–∏–±–æ–Ω–∞—á—á–∏
 }
 
 int main() {
     setlocale(LC_ALL, "Russian");
     int amount;
-    cout << "¬‚Â‰ËÚÂ ÍÓÎË˜ÂÒÚ‚Ó ˜ËÒÂÎ ‘Ë·ÓÌ‡˜˜Ë, ÍÓÚÓÓÂ ÌÛÊÌÓ ‚˚‚ÂÒÚË ";
+    cout << "–í–≤–µ–¥–∏—Ç–µ –∫–æ–ª–∏—á–µ—Å—Ç–≤–æ —á–∏—Å–µ–ª –§–∏–±–æ–Ω–∞—á—á–∏, –∫–æ—Ç–æ—Ä–æ–µ –Ω—É–∂–Ω–æ –≤—ã–≤–µ—Å—Ç–∏ ";
     cin >> amount;
     while (amount < 1) {
-        cout << " ÓÎË˜ÂÒÚ‚Ó ˜ËÒÂÎ ÌÂ ÏÓÊÂÚ ·˚Ú¸ ÏÂÌ¸¯Â 1. œÓÔÓ·ÛÈÚÂ Â˘Â ‡Á: ";
+        cout << "–ö–æ–ª–∏—á–µ—Å—Ç–≤–æ —á–∏—Å–µ–ª –Ω–µ –º–æ–∂–µ—Ç –±—ã—Ç—å –º–µ–Ω—å—à–µ 1. –ü–æ–ø—Ä–æ–±—É–π—Ç–µ –µ—â–µ —Ä–∞–∑: ";
         cin >> amount;
     }
-    for (int num = 0; num < amount; num++) {
+    for (int num = 0; num < amount; num++) { //–≤—ã–≤–æ–¥ —á–∏—Å–µ–ª —Ä—è–¥–∞ –§–∏–±–æ–Ω–∞—á—á–∏
         cout << fibonacci(num) << endl;
     }
-
     return 0;
 }
