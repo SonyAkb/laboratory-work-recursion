@@ -1,19 +1,17 @@
 ﻿#include <iostream>
 using namespace std;
 
-void moving_the_ring(int* ptr_tower, int start, int end, int max_size, int n);
-void one_layer_of_the_tower(int* ptr_tower, int n, int layer, int num_tower);
-void print_tower(int* ptr_tower, int n, int max_size);
+void moving_the_ring(int* ptr_tower, int start, int end, int max_size, int n); //передвигаю кольцо с одной башни на другую
+void one_layer_of_the_tower(int* ptr_tower, int n, int layer, int num_tower); //вывожу один слой ВСЕХ башен
+void print_tower(int* ptr_tower, int n, int max_size); //вывод всех 3х башен
 int Han(int n, int start, int end, int point, int* ptr_tower, int max_size, int constant_n);
 
 int main() {
     setlocale(LC_ALL, "Russian");
     const int max_size = 100;
-    int start, end, point, n;
+    int start, end, point, n, tower_list[max_size * 3];
 
-    int tower_list[max_size * 3];
-
-    cout << " Ханойская башня " << endl << "Даны 3 стержня" << endl;
+    cout << "Ханойская башня " << endl << "Даны 3 стержня" << endl;
     do {
         cout << "Введите номер СТАРТОВОГО стержня (1, 2 или 3) ";
         cin >> start;
@@ -30,7 +28,7 @@ int main() {
     }
 
     do {
-        cout << "Введите колличество дисков ";
+        cout << "Введите количество дисков ";
         cin >> n;
     } while (n < 2 || n > max_size);
 
@@ -57,7 +55,8 @@ void moving_the_ring(int* ptr_tower, int start, int end, int max_size, int n) { 
     else {
         ptr_tower[(end - 1) * max_size] -= 1; //меняю верхнее кольцо конечной башни если на башне есть кольца
     }
-    ptr_tower[(end - 1) * max_size + ptr_tower[(end - 1) * max_size]] = ptr_tower[(start - 1) * max_size + ptr_tower[(start - 1) * max_size]]; //ставлю новое кольцо
+    ptr_tower[(end - 1) * max_size + ptr_tower[(end - 1) * max_size]] = ptr_tower[(start - 1) * max_size + ptr_tower[(start - 1) * max_size]]; 
+    //ставлю новое кольцо
 
     ptr_tower[(start - 1) * max_size + ptr_tower[(start - 1) * max_size]] = 0; //убираю верхнее кольцо с начальной башни
     if (ptr_tower[(start - 1) * max_size] == n) {
@@ -107,7 +106,7 @@ void print_tower(int* ptr_tower, int n, int max_size) { //вывод всех 3�
     cout << endl;
 }
 
-int Han(int n, int start, int end, int point, int* ptr_tower, int max_size, int constant_n) { ///нужна постоянная n
+int Han(int n, int start, int end, int point, int* ptr_tower, int max_size, int constant_n) { //перекладываю кольца рекурсией
     if (n > 0) {
         Han(n - 1, start, point, end, ptr_tower, max_size, constant_n);
 
