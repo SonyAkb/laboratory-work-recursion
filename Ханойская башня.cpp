@@ -106,10 +106,31 @@ void print_tower(int* ptr_tower, int n, int max_size) { //вывод всех 3�
     cout << endl;
 }
 
+void print_parameters(int n, int start, int end, int point, int* ptr_tower, int max_size, int constant_n) {
+    cout << "Параметры функции" << endl; //вывод параметров
+    cout << "Han(" << n << ", " << start << ", " << end << ", " << point << ", " << "[";
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < constant_n + 1; j++) {
+            cout << ptr_tower[i * max_size + j];
+            if (i != 2 || j != constant_n) {
+                cout << ", ";
+            }
+        }
+        if (i != 2) {
+            cout << "... , ";
+        }
+    }
+    cout << "], " << max_size << ", " << constant_n << ") " << endl;
+    if (n != 0) {
+        cout << "Необходимо переложить со стержня " << start << " на стержень " << end << " диск радиуса " << n << endl << endl;
+    }
+    else cout << endl;
+}
+
 int Han(int n, int start, int end, int point, int* ptr_tower, int max_size, int constant_n) { //перекладываю кольца рекурсией
+    print_parameters(n, start, end, point, ptr_tower, max_size, constant_n); //вывод параметров
     if (n > 0) {
         Han(n - 1, start, point, end, ptr_tower, max_size, constant_n);
-
         moving_the_ring(ptr_tower, start, end, max_size, constant_n); //передвигаю кольцо с одной башни на другую
 
         cout << "Перекладываем верхний диск со стержня " << start << " на стержень " << end << endl;
